@@ -1,0 +1,49 @@
+@import '../../colors.css';
+
+.coin {
+    background: #FFFFFF;
+    box-shadow: 4px 4px 33px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.coin, .rate,
+.icon-rate,
+.price-coin-symbol {
+    display: flex;
+}
+
+.coin {
+    gap: 1.5rem;
+}
+
+.coin,
+.price-coin-symbol {
+    flex-direction: column;
+}
+
+.icon-rate,
+.rate {
+    gap: .5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coin .price-coin-symbol {
+    gap: .2rem;
+}
+
+.coin .price-coin-symbol .price-change {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.coin .price-coin-symbol .symbol {
+    font-size: .8rem;
+    color: var(--gray);
+}
+
+.icon-rate,
+.rate  {
+    font-size: .8rem;
+}

@@ -1,0 +1,35 @@
+@import '../../colors.css';
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.menu-item:hover .icon-label {
+    color: var(--purple);
+    font-weight: bold;
+}
+
+.menu-item .icon-label {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.menu-item:hover .icon-label .svg-icon, .active-icon {
+    filter: brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(3895%) hue-rotate(227deg) brightness(96%) contrast(104%);
+    transition: all ease;
+  }
+  
+
+  
+.menu-item  .active-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--purple);
+}

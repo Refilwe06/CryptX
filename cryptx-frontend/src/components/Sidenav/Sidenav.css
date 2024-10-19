@@ -1,0 +1,9 @@
+@import '../../colors.css';
+
+.sidenav {
+    background-color: var(--lightgray);
+    padding: 1.5rem 1.5rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}

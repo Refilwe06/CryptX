@@ -1,0 +1,31 @@
+@import '../../colors.css';
+
+.live-market-item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.icon-coin,
+.change-rate,
+.price,
+.coin-currency {
+    display: flex;
+}
+
+
+.change-rate,
+.price,
+.coin-currency {
+    flex-direction: column;
+}
+
+.change-rate,
+.price,
+.coin-currency {
+    align-items: flex-start;
+}
+
+.icon-coin {
+    gap: 1rem;
+}

@@ -1,0 +1,37 @@
+.dashboard-container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-container .separator {
+    width: 100%;
+    height: 1px;
+    background-color: #E4E4E4;
+}
+
+.dashboard-container .card-section {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+}
+
+.dashboard-container .card-section .coins {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.dashboard-container,
+.dashboard-container .card-section,
+.dashboard-container .card-section .coins {
+    gap: 1.5rem;
+}
+
+.live-market-transactions {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+}
+
+.live-market-transactions h3 {
+    margin: 0 0 1rem 0;
+}

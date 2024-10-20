@@ -27,7 +27,7 @@ router.post("/sign-up", (req, res) => {
             db.query(sql, [values], (err, result) => {
                 if (err) {
                     console.error(err.stack);
-                    err.message = err.message.includes('Duplicate') ? 'Email already exists, please login' : err.message;
+                    err.message = err.message.includes('Duplicate') ? 'User already exists, please login' : err.message;
                     return res.status(400).json({ err: err.message });
                 }
 
@@ -54,7 +54,7 @@ router.post("/sign-up", (req, res) => {
     });
 });
 
-//  Log existing user in
+// Log existing user in
 router.post("/sign-in", (req, res) => {
     const { username, password } = req.body;
 

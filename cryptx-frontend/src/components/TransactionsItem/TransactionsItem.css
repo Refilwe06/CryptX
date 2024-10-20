@@ -1,0 +1,27 @@
+@import '../../colors.css';
+
+.transaction,
+.price-date,
+.name-status, .icon-status {
+    display: flex;
+}
+
+.transaction {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-status  {
+    gap: 1rem;
+}
+
+
+.price-date, .name-status {
+    flex-direction: column;
+}
+
+.light-text {
+    color: var(--gray);
+    font-size: 400;
+    font-size: .8rem;
+}

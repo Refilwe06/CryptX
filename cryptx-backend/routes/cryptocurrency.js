@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const db = require("../db");
+const axios = require('axios');
 
-// Register new user
+// Fetch dummy transaction data from my db
 router.get("/get-transactions", (req, res) => {
     // fetch user from my db using the provided username
     const sql = "SELECT * FROM cryptx_transactions";
@@ -20,5 +21,60 @@ router.get("/get-transactions", (req, res) => {
         }
     });
 });
+
+// Fetch coin prices for the last 6 months from Gecko Coin API
+router.get("/fetch-coin-prices", async (req, res) => {
+    const { coinId } = req.query;
+    try {
+        const response = await axios.get(`${process.env.COIN_GECKO_URL}/coins/${coinId}/market_chart`, {
+            params: {
+                vs_currency: 'usd',
+                days: 183
+            }
+        });
+        const result = response.data;
+
+        const transformedData = groupDataByMonth(result.prices);
+        res.status(200).send({ data: transformedData })
+    } catch (error) {
+        console.error('Error fetching coin prices:', error);
+        return res.status(500).json({ err: error.message })
+    }
+})
+
+// Function to group data by month and calculate the average price for each month
+const groupDataByMonth = (prices) => {
+    const monthlyData = {};
+
+    prices.forEach(price => {
+        const date = new Date(price[0]); // Convert timestamp to date
+        const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`; // Get year-month (e.g., '2024-10')
+
+        // If the monthYear key doesn't exist, create it with an array to hold the prices
+        if (!monthlyData[monthYear]) {
+            monthlyData[monthYear] = [];
+        }
+
+        // Add the price for this particular day to the corresponding month
+        monthlyData[monthYear].push(price[1]);
+    });
+
+    // Calculate the average price for each month
+    const result = Object.keys(monthlyData).map(monthYear => {
+        const pricesInMonth = monthlyData[monthYear];
+        const averagePrice = pricesInMonth.reduce((sum, price) => sum + price, 0) / pricesInMonth.length;
+
+        // Convert the monthYear back to a readable format (e.g., "Jan")
+        const [year, month] = monthYear.split('-');
+        const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'short' });
+
+        return {
+            name: `${monthName}`,
+            price: averagePrice,
+        };
+    });
+
+    return result;
+};
 
 module.exports = router;

@@ -57,11 +57,11 @@ const BitcoinGraph = ({ coinId = 'bitcoin' }) => {
 
     return (
         <div className="graph-container">
-            <h3>BTC Graph</h3>
-            <ResponsiveContainer width="100%" height={200}>
+            <h3 style={{ marginTop: 0 }}>BTC Graph</h3>
+            <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-                    <XAxis dataKey="name" tick={{ fill: '#A3A3A3', fontSize: 14 }} />
-                    <YAxis tick={{ fill: '#A3A3A3', fontSize: 14 }} tickFormatter={(value) => `$${value.toLocaleString()}`} />
+                    <XAxis dataKey="name" tick={{ fontSize: 14 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fontSize: 14 }} tickFormatter={(value) => `$${value.toLocaleString()}`} axisLine={false} tickLine={false} />
                     <Tooltip content={<CustomTooltip />} />
                     <Line
                         type="monotone"

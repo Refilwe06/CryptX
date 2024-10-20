@@ -29,3 +29,9 @@
 .icon-coin {
     gap: 1rem;
 }
+
+.light-text {
+    color: var(--gray);
+    font-size: 400;
+    font-size: .8rem;
+}

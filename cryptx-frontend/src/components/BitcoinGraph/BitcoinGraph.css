@@ -1,0 +1,8 @@
+@import '../../colors.css';
+
+.graph-container {
+    background: #FFFFFF;
+    box-shadow: 4px 4px 33px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+}

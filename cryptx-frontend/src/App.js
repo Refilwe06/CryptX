@@ -1,4 +1,5 @@
 import './App.css';
+import ProtectedRoutes from './components/ProtectedRoute/ProtectedRoutes';
 import { UserProvider } from './context/UserContext';
 import Login from './pages/Login/Login';
 import Overview from './pages/Overview/Overview';
@@ -12,7 +13,9 @@ function App() {
           <Route path='/' element={<Login />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
-          <Route path='/overview' element={<Overview />}></Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/overview' element={<Overview />}></Route>
+          </Route>
         </Routes>
       </UserProvider>
     </BrowserRouter>

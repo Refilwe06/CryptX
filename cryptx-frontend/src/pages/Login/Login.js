@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import '../Register/Auth.css'; 
+import '../Register/Auth.css';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
+    const { login, loading, error, user } = useAuth();
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -43,13 +46,18 @@ const Login = () => {
             console.log('Form Submitted', formData);
 
             // if no errors, call the login endpoint
-            
+            login(formData.username, formData.password);
         }
     };
 
     return (
         <div className="auth-container">
             <h2>Login</h2>
+            <div className="server-response">
+                {
+                    error ? <small className='error'>{error}</small> : user ? <small className='success'>Login successful.</small> : ''
+                }
+            </div>
             <form onSubmit={handleSubmit} className="auth-form">
                 <div className="input-container">
                     <label htmlFor="username">Username</label>
@@ -77,7 +85,7 @@ const Login = () => {
                     {errors.password && <p className="error-message">{errors.password}</p>}
                 </div>
 
-                <button type="submit" className="submit-button">Login</button>
+                <button type="submit" className="submit-button" disabled={loading}>{loading ? 'Loading' : 'Login'}</button>
             </form>
             <div className='login-register'>
                 <p>Not a user? Register <Link to={'/register'} className='link'>here</Link>. </p>

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
+    const { register, loading, error, user } = useAuth();
+
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -51,13 +54,20 @@ const Register = () => {
         if (Object.keys(formErrors).length === 0) {
             console.log('Form Submitted', formData);
             // if no errors, call the register endpoint
-
+            const { name, username, password } = formData;
+            register(name, username, password);
         }
     };
 
     return (
         <div className="auth-container">
             <h2>Register</h2>
+            <div className="server-response">
+                {
+                    error ? <small className='error'>{error}</small> : user ? <small className='success'>Registration successful.</small> : ''
+                }
+            </div>
+
             <form onSubmit={handleSubmit} className="auth-form">
                 <div className="input-container">
                     <label htmlFor="name">Name</label>
@@ -98,10 +108,10 @@ const Register = () => {
                     {errors.password && <p className="error-message">{errors.password}</p>}
                 </div>
 
-                <button type="submit" className="submit-button">Register</button>
+                <button type="submit" className="submit-button" disabled={loading}>{loading ? 'Loading' : 'Register'}</button>
             </form>
             <div className='login-register'>
-            <p>Already a user? Login <Link to={'/login'} className='link'>here</Link>. </p>
+                <p>Already a user? Login <Link to={'/login'} className='link'>here</Link>. </p>
             </div>
         </div>
     );

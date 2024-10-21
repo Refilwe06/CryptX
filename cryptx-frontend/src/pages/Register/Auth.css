@@ -52,7 +52,7 @@
     background-color: #5145D9;
 }
 
-.error-message {
+.error-message, .error {
     color: red;
     font-size: 12px;
     margin-top: 5px;
@@ -66,5 +66,14 @@
     color: #6154F0;
     text-decoration: underline;
     cursor: pointer;
+    font-weight: bold;
+}
+
+.success {
+    color: #1ECB4F;
+}
+
+.server-response {
+    text-align: center;
     font-weight: bold;
 }

@@ -42,7 +42,7 @@ router.post("/sign-up", (req, res) => {
                     }
                     const user = result[0];
                     // sign user_id and create a json web token for authorization
-                    const token = jwt.sign({ user_id: user.user_id }, process.env.jwt_SECRET, {
+                    const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET, {
                         expiresIn: "1d",
                     });
                     delete user.password; // Don't send the password back to my frontend

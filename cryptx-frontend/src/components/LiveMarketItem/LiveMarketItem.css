@@ -20,10 +20,14 @@
     flex-direction: column;
 }
 
-.change-rate,
+
 .price,
 .coin-currency {
     align-items: flex-start;
+}
+
+.change-rate {
+    align-items: center;
 }
 
 .icon-coin {

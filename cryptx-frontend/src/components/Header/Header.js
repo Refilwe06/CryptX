@@ -19,8 +19,8 @@ const Header = () => {
                     <div className="avatar"><b>{user?.name[0]}</b></div>
                     <div className="user-details">
                         <div className="user-name">
-                            <b>{user?.name}</b>
-                            <span>@{user?.username}</span>
+                            <b className='ellipsis'>{user?.name}</b>
+                            <span className='ellipsis'>@{user?.username}</span>
                         </div>
                         <img src={`${process.env.PUBLIC_URL}/arrowdown.svg`} alt="Help Icon" />
                     </div>

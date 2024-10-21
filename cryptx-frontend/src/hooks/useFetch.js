@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useFetch = (url) => {
+    console.log(process.env.REACT_APP_API_URL)
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

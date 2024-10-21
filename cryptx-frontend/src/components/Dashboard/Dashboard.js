@@ -8,7 +8,7 @@ import Transactions from '../Transactions/Transactions';
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const { data, loading, error } = useFetch('http://localhost:5000/crypto/fetch-coin-data');
+    const { data, loading, error } = useFetch(process.env.REACT_APP_API_URL + '/crypto/fetch-coin-data');
     const [coinData, setCoinData] = useState([]);
 
     useEffect(() => {

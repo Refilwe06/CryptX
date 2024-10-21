@@ -33,7 +33,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 
 const BitcoinGraph = ({ coinId = 'bitcoin' }) => {
-    const { data: btcData, loading, error } = useFetch('http://localhost:5000/crypto/fetch-coin-prices?coinId=' + coinId);
+    const { data: btcData, loading, error } = useFetch(process.env.REACT_APP_API_URL + '/crypto/fetch-coin-prices?coinId=' + coinId);
     const [graphData, setGraphData] = useState([]);
 
     useEffect(() => {

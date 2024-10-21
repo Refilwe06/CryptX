@@ -12,7 +12,7 @@ router.get("/get-transactions", (req, res) => {
         if (err) return res.status(500).json({ err: err.message });
 
         if (data.length > 0) {
-            if (err) return res.status(400).json({ err: "Error fetching transactions" });
+            if (err) return res.status(400).json({ err: err.message });
 
             // send transactions back to my frontend
             return res.status(200).json({ transactions: data });
@@ -22,7 +22,7 @@ router.get("/get-transactions", (req, res) => {
     });
 });
 
-// Fetch coin prices for the last 6 months from Gecko Coin API
+// Fetch coin prices for the last 6 months from Coin Gecko API for a single coin
 router.get("/fetch-coin-prices", async (req, res) => {
     const { coinId } = req.query;
     try {
@@ -41,6 +41,37 @@ router.get("/fetch-coin-prices", async (req, res) => {
         return res.status(500).json({ err: error.message })
     }
 })
+
+// Fetch coin prices for the last 6 months from Coin Gecko API for multiple coins
+router.get("/fetch-multiple-coin-prices", async (req, res) => {
+    try {
+        const coinIds = ['bitcoin', 'ethereum', 'litecoin', 'cardano'];  // Replace with your coin IDs
+
+        // Make multiple requests in parallel using Axios
+        const responses = await Promise.all(
+            coinIds.map(id => axios.get(`${process.env.COIN_GECKO_URL}/coins/${id}/market_chart`, {
+                params: {
+                    vs_currency: 'usd',
+                    days: '183',
+                },
+                headers: {
+                    'x-cg-demo-api-key': process.env.COIN_GECKO_API_KEY
+                }
+            }))
+        );
+
+        // Combine the responses into a single data object
+        const result = responses.map((response, index) => ({
+            id: coinIds[index],
+            data: groupDataByMonth(response.data.prices)
+        }));
+
+        res.status(200).json(result);  // Send combined data to frontend
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ message: 'Error fetching cryptocurrency data' });
+    }
+});
 
 // Function to group data by month and calculate the average price for each month
 const groupDataByMonth = (prices) => {
@@ -70,11 +101,30 @@ const groupDataByMonth = (prices) => {
 
         return {
             name: `${monthName}`,
-            price: averagePrice,
+            price: averagePrice.toFixed(2),
         };
     });
 
     return result;
 };
+
+// Fetch coin data from Coin Gecko API for bitcoin, ethereum, litecoin and cardano
+router.get("/fetch-coin-data", async (req, res) => {
+    try {
+        const response = await axios.get(`${process.env.COIN_GECKO_URL}/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Clitecoin%2Ccardano`, {
+            headers: {
+                'x-cg-demo-api-key': process.env.COIN_GECKO_API_KEY
+            }
+        });
+        const result = response.data;
+
+        res.status(200).send({ coinData: result })
+    } catch (error) {
+        console.error('Error fetching coin data:', error);
+        return res.status(500).json({ err: error.message })
+    }
+})
+
+
 
 module.exports = router;

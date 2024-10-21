@@ -1,6 +1,7 @@
 import "./Menu.css";
 import MenuItem from "../MenuItem/MenuItem";
 import { useState } from 'react';
+import useAuth from "../../hooks/useAuth";
 
 const Menu = () => {
     const [activeMenuItem, setActiveMenuItem] = useState(0);
@@ -38,7 +39,8 @@ const Menu = () => {
         {
             icon: 'logout.svg',
             route: '',
-            label: 'Logout'
+            label: 'Logout',
+            logout: useAuth().logout
         },
     ]
     return (

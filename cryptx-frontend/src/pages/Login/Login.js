@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../Register/Auth.css';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
-    const { login, loading, error, user } = useAuth();
+    const { login, loading, error } = useAuth();
+    const { setUser, user } = useContext(UserContext);
 
     const [formData, setFormData] = useState({
         username: '',
@@ -46,7 +48,7 @@ const Login = () => {
             console.log('Form Submitted', formData);
 
             // if no errors, call the login endpoint
-            login(formData.username, formData.password);
+            login(formData.username, formData.password, setUser)
         }
     };
 

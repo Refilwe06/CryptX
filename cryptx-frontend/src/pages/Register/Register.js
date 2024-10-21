@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Auth.css';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { UserContext } from '../../context/UserContext';
 
 const Register = () => {
-    const { register, loading, error, user } = useAuth();
+    const { register, loading, error } = useAuth();
+    const { setUser, user } = useContext(UserContext);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -55,7 +57,7 @@ const Register = () => {
             console.log('Form Submitted', formData);
             // if no errors, call the register endpoint
             const { name, username, password } = formData;
-            register(name, username, password);
+            register(name, username, password, setUser);
         }
     };
 

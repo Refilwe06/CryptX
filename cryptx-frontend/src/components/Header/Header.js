@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Header.css';
 import SearchBar from '../SearchBar/SearchBar';
+import { UserContext } from '../../context/UserContext';
 
 const Header = () => {
+    const { user } = useContext(UserContext);
+
     return (
         <div className='header'>
             <SearchBar />
@@ -13,11 +16,11 @@ const Header = () => {
 
                 </div>
                 <div className="profile-section">
-                    <div className="avatar"><b>L</b></div>
+                    <div className="avatar"><b>{user?.name[0]}</b></div>
                     <div className="user-details">
                         <div className="user-name">
-                        <b>Laurice</b>
-                        <span>@laurice22</span>
+                            <b>{user?.name}</b>
+                            <span>@{user?.username}</span>
                         </div>
                         <img src={`${process.env.PUBLIC_URL}/arrowdown.svg`} alt="Help Icon" />
                     </div>

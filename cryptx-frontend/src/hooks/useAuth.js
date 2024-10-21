@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
-    const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const serverURL = process.env.REACT_APP_API_URL;
@@ -10,7 +9,7 @@ const useAuth = () => {
     const navigate = useNavigate();
 
     // Register function
-    const register = async (name, username, password) => {
+    const register = async (name, username, password, setContextUser) => {
         setLoading(true);
         try {
             const response = await fetch(serverURL + '/auth/sign-up', {
@@ -27,7 +26,7 @@ const useAuth = () => {
                 throw new Error(result.err || 'Registration failed');
             }
 
-            setUser(result.user);
+            setContextUser(result.user);
             localStorage.setItem('token', result.token || '');
             localStorage.setItem('user', JSON.stringify(result.user || ''));
             setTimeout(() => {
@@ -42,7 +41,7 @@ const useAuth = () => {
     };
 
     // Login function
-    const login = async (username, password) => {
+    const login = async (username, password, setContextUser) => {
         setLoading(true);
         try {
             const response = await fetch(serverURL + '/auth/sign-in', {
@@ -59,7 +58,7 @@ const useAuth = () => {
                 throw new Error(result.message || 'Login failed');
             }
 
-            setUser(result.user);
+            setContextUser(result.user);
             localStorage.setItem('token', result.token || '');
             localStorage.setItem('user', JSON.stringify(result.user || ''));
             setTimeout(() => {
@@ -74,16 +73,16 @@ const useAuth = () => {
     };
 
     // Logout function
-    const logout = () => {
+    const logout = (setContextUser) => {
+        setContextUser(null);
         setTimeout(() => {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            navigate('/overview');
-        }, 1500);
+            navigate('/login');
+        }, 500);
     };
 
     return {
-        user,
         error,
         loading,
         register,

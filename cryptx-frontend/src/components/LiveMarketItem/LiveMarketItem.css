@@ -2,7 +2,7 @@
 
 .live-market-item {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1.2fr 1.2fr .8fr;
     gap: 1rem;
 }
 
@@ -26,8 +26,12 @@
     align-items: flex-start;
 }
 
-.change-rate {
+.change-rate, .icon-coin {
     align-items: center;
+}
+
+.change-rate, .price {
+    justify-content: center;
 }
 
 .icon-coin {

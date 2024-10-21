@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import useFetch from '../../hooks/useFetch';
 import LineGraph from '../LineGraph/LineGraph';
 import './LiveMarketItem.css';
 
@@ -23,7 +21,7 @@ const LiveMarketItem = ({ id, name, market_cap_change_24h, market_cap_change_per
     return (
         <div className="live-market-item">
             <div className="icon-coin">
-                <img src={`${process.env.PUBLIC_URL}/${icons[id]['path']}`} alt={name + ' icon'} />
+                <img src={`${process.env.PUBLIC_URL}/${icons[id]['path']}`} alt={name + ' icon'} width={50} />
                 <div className="coin-currency">
                     <span className='font-600'>{name}</span>
                     <small className='symbol light-text'><span style={{ textTransform: 'uppercase' }}> {symbol}</span> / USDT</small>
@@ -31,7 +29,7 @@ const LiveMarketItem = ({ id, name, market_cap_change_24h, market_cap_change_per
             </div>
             <div className="change-rate">
                 <span className='light-text'>Change</span>
-                <span style={{ color: (isProfit ? '#1ECB4F' : '#FF8D4D'), fontWeight: 500, fontSize: '0.8rem' }}>{isProfit ? '+' : ''}{market_cap_change_percentage_24h.toFixed(2)}%</span>
+                <span style={{ color: (isProfit ? '#1ECB4F' : '#FF8D4D'), fontWeight: 500, fontSize: '0.8rem', marginTop: 5 }}>{isProfit ? '+' : ''}{market_cap_change_percentage_24h.toFixed(2)}%</span>
             </div>
             <div className="price">
                 <span className='light-text'>Price</span>
@@ -42,4 +40,4 @@ const LiveMarketItem = ({ id, name, market_cap_change_24h, market_cap_change_per
     )
 }
 
-export default LiveMarketItem
+export default LiveMarketItem;

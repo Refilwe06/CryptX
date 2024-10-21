@@ -3,7 +3,7 @@ import './MenuItem.css';
 const MenuItem = ({ item, activeMenuItem, setActiveMenuItem, index }) => {
     const { label, icon } = item;
     const isActive = index === activeMenuItem;
-    console.log({isActive})
+
     return (
         <div className='menu-item' onClick={() => setActiveMenuItem(index)}>
             <div className="icon-label">

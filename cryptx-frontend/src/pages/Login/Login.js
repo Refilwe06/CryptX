@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../Register/Auth.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { UserContext } from '../../context/UserContext';
 
@@ -8,7 +8,8 @@ const Login = () => {
     const { login, loading, error } = useAuth();
     const { setUser, user } = useContext(UserContext);
     const sessionExpired = window.location.href.includes('expired');
-
+    const navigate = useNavigate();
+    
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -52,6 +53,13 @@ const Login = () => {
             login(formData.username, formData.password, setUser)
         }
     };
+
+    useEffect(() => {
+        // If the user is already logged in, redirect to the profile page
+        if (user) {
+            navigate('/overview');
+        }
+    }, [user, navigate]);
 
     return (
         <div className="auth-container">

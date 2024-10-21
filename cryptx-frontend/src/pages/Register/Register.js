@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Auth.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { UserContext } from '../../context/UserContext';
 
 const Register = () => {
     const { register, loading, error } = useAuth();
     const { setUser, user } = useContext(UserContext);
+    const navigate = useNavigate();
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -60,6 +62,13 @@ const Register = () => {
             register(name, username, password, setUser);
         }
     };
+
+    useEffect(() => {
+        // If the user is already logged in, redirect to the profile page
+        if (user) {
+            navigate('/overview');
+        }
+    }, [user, navigate]);
 
     return (
         <div className="auth-container">

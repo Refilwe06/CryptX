@@ -8,7 +8,7 @@ import Transactions from '../Transactions/Transactions';
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const { data } = useFetch('http://localhost:5000/crypto/fetch-coin-data');
+    const { data, loading, error } = useFetch('http://localhost:5000/crypto/fetch-coin-data');
     const [coinData, setCoinData] = useState([]);
 
     useEffect(() => {
@@ -28,12 +28,21 @@ const Dashboard = () => {
             <Header />
             <div className="separator"></div>
             <div className="card-section">
-                <div className="coins">
+                <>
                     {
-                        sortedCoins.map((coin) => <CoinCard key={coin.id} {...coin} />)
+                        loading ? <p>Loading...</p>
+                            :
+                            error ? <p>{error}.</p>
+                                :
+                                <div className="coins">
+                                    {
+                                        sortedCoins.map((coin) => <CoinCard key={coin.id} {...coin} />)
+                                    }
+                                </div>
                     }
-                </div>
-                <BitcoinGraph  />
+                </>
+
+                <BitcoinGraph />
             </div>
             <div className="live-market-transactions">
                 <div>

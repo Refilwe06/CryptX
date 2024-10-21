@@ -29,7 +29,7 @@
 .live-market-transactions {
     display: grid;
     grid-template-columns: 3fr 1.5fr;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .live-market-transactions h3 {

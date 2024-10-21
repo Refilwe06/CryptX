@@ -7,6 +7,7 @@ import { UserContext } from '../../context/UserContext';
 const Login = () => {
     const { login, loading, error } = useAuth();
     const { setUser, user } = useContext(UserContext);
+    const sessionExpired = window.location.href.includes('expired');
 
     const [formData, setFormData] = useState({
         username: '',
@@ -57,7 +58,7 @@ const Login = () => {
             <h2>Login</h2>
             <div className="server-response">
                 {
-                    error ? <small className='error'>{error}</small> : user ? <small className='success'>Login successful.</small> : ''
+                    error ? <small className='error'>{error}</small> : sessionExpired ? <small className='error'>Your session has expired, please log in</small> : user ? <small className='success'>Login successful.</small> : ''
                 }
             </div>
             <form onSubmit={handleSubmit} className="auth-form">

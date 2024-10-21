@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const db = require("../db");
 const axios = require('axios');
+const verifyToken = require("../middleware/authMiddleware");
 
 // Fetch dummy transaction data from my db
-router.get("/get-transactions", (req, res) => {
+router.get("/get-transactions", verifyToken, (req, res) => {
     // fetch user from my db using the provided username
     const sql = "SELECT * FROM cryptx_transactions";
 
@@ -23,7 +24,7 @@ router.get("/get-transactions", (req, res) => {
 });
 
 // Fetch coin prices for the last 6 months from Coin Gecko API for a single coin
-router.get("/fetch-coin-prices", async (req, res) => {
+router.get("/fetch-coin-prices", verifyToken, async (req, res) => {
     const { coinId } = req.query;
     try {
         const response = await axios.get(`${process.env.COIN_GECKO_URL}/coins/${coinId}/market_chart`, {
@@ -43,7 +44,7 @@ router.get("/fetch-coin-prices", async (req, res) => {
 })
 
 // Fetch coin prices for the last 6 months from Coin Gecko API for multiple coins
-router.get("/fetch-multiple-coin-prices", async (req, res) => {
+router.get("/fetch-multiple-coin-prices", verifyToken, async (req, res) => {
     try {
         const coinIds = ['bitcoin', 'ethereum', 'litecoin', 'cardano'];  // Replace with your coin IDs
 
@@ -109,7 +110,7 @@ const groupDataByMonth = (prices) => {
 };
 
 // Fetch coin data from Coin Gecko API for bitcoin, ethereum, litecoin and cardano
-router.get("/fetch-coin-data", async (req, res) => {
+router.get("/fetch-coin-data", verifyToken, async (req, res) => {
     try {
         const response = await axios.get(`${process.env.COIN_GECKO_URL}/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Clitecoin%2Ccardano`, {
             headers: {

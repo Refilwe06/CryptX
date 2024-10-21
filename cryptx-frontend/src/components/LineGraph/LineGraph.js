@@ -1,46 +1,45 @@
 import React from "react";
 import {
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Area
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+    AreaChart,
+    Area
 } from "recharts";
 
-const data = [
-  { name: "Jan", value: 400 },
-  { name: "Feb", value: 300 },
-  { name: "Mar", value: 500 },
-  { name: "Apr", value: 200 },
-  { name: "May", value: 600 },
-  { name: "Jun", value: 400 },
-  { name: "Jul", value: 700 },
-];
+// Line Graph component to display average price of coin over the last 6 months
+const LineGraph = ({ lineGraphData }) => {
+    const colors = {
+        bitcoin: "#f9bd1f",
+        ethereum: "#6154F0",
+        litecoin: "#3654ed",
+        cardano: "#1ecb50"
+    }
 
-const LineGraph = () => {
-  return (
-    <ResponsiveContainer width={162} height={40}>
-      <AreaChart data={data}>
-        <defs>
-          <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#6154F0" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#6154F0" stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis dataKey="name" hide />
-        <YAxis hide />
-        <Tooltip />
-        <Area
-          type="monotone"
-          dataKey="value"
-          stroke="#6154F0"
-          fillOpacity={1}
-          fill="url(#colorValue)"
-        />
-      </AreaChart>
-    </ResponsiveContainer>
-  );
+    return (
+        <ResponsiveContainer>
+            <AreaChart data={lineGraphData?.data}>
+                <defs>
+                    <linearGradient id={lineGraphData?.id} x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={colors[lineGraphData?.id]} stopOpacity={0.3} />
+                        <stop offset="95%" stopColor={colors[lineGraphData?.id]} stopOpacity={0} />
+                    </linearGradient>
+                </defs>
+                <XAxis dataKey="name" hide />
+                <YAxis hide />
+                <Tooltip />
+                <Area
+                    type="monotone"
+                    dataKey="price"
+                    stroke={colors[lineGraphData?.id]}
+                    strokeWidth={4}
+                    fillOpacity={1}
+                    fill={`url(#${lineGraphData?.id})`}
+                />
+            </AreaChart>
+        </ResponsiveContainer>
+    );
 };
 
 export default LineGraph;

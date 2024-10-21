@@ -5,7 +5,9 @@ import './Overview.css';
 const Overview = () => {
     return (
         <div className="overview-wrapper full-height">
-            <Sidenav />
+            <div className="hide">
+                <Sidenav />
+            </div>
             <Dashboard />
         </div>
     )

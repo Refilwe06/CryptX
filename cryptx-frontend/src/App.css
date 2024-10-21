@@ -22,3 +22,117 @@ body,
 .font-600 {
     font-weight: 600;
 }
+
+.hamburger-icon {
+    display: none;
+}
+
+/* Medium desktop screens */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    /* styles for medium desktop screens */
+    .overview-wrapper .dashboard-container .card-section,
+    .overview-wrapper .dashboard-container .live-market-transactions {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .overview-wrapper .hide {
+        display: block !important;
+    }
+}
+
+/* Large tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .overview-wrapper {
+        grid-template-columns: unset !important;
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .overview-wrapper .dashboard-container .card-section,
+    .overview-wrapper .dashboard-container .live-market-transactions,
+    .overview-wrapper .dashboard-container .live-market-item {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .coin-change-rate,
+    .price-graph {
+        justify-content: space-between;
+    }
+
+    .overview-wrapper .line-graph {
+        height: 150px !important;
+    }
+
+    .live-market-item .left-section {
+        width: 100%;
+    }
+
+    .overview-wrapper .hide {
+        display: none !important;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 767px) {
+
+    .overview-wrapper {
+        grid-template-columns: unset !important;
+    }
+
+    .overview-wrapper .dashboard-container {
+        padding: .5rem;
+    }
+
+    .dashboard-container .coin,
+    .dashboard-container .graph-container {
+        padding: 1rem;
+    }
+
+    .overview-wrapper .dashboard-container,
+    .overview-wrapper .dashboard-container .user-actions,
+    .overview-wrapper .dashboard-container .user-actions .icons,
+    .overview-wrapper .dashboard-container .card-section .coins {
+        gap: .5rem;
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .search-bar {
+        width: 220px !important;
+    }
+
+    .overview-wrapper .dashboard-container .card-section,
+    .overview-wrapper .dashboard-container .live-market-transactions,
+    .overview-wrapper .dashboard-container .live-market-item {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .coin-change-rate.overview-wrapper .dashboard-container,
+    .overview-wrapper .dashboard-container .price-graph {
+        justify-content: space-between;
+    }
+
+    .overview-wrapper .line-graph {
+        height: 150px !important;
+    }
+
+    .user-details .user-name, .overview-wrapper .hide {
+        display: none !important;
+    }
+
+    .overview-wrapper .dashboard-container .card-section .price-change {
+        font-size: 1rem;
+    }
+}

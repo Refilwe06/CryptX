@@ -2,13 +2,17 @@ import React, { useContext } from 'react'
 import './Header.css';
 import SearchBar from '../SearchBar/SearchBar';
 import { UserContext } from '../../context/UserContext';
+import Drawer from '../Drawer/Drawer';
 
 const Header = () => {
     const { user } = useContext(UserContext);
 
     return (
         <div className='header'>
-            <SearchBar />
+            <div className='menu-search'>
+                <Drawer />
+                <SearchBar />
+            </div>
             <div className="user-actions">
                 <div className="icons">
                     <img src={`${process.env.PUBLIC_URL}/bell.svg`} alt="Bell Icon" />

@@ -2,14 +2,23 @@
 
 .live-market-item {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1.2fr .8fr;
+    grid-template-columns: 4fr 1.5fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.live-market-item .left-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
     gap: 1rem;
 }
 
 .icon-coin,
 .change-rate,
 .price,
-.coin-currency {
+.coin-currency,
+.coin-change-rate,
+.price-graph {
     display: flex;
 }
 
@@ -40,6 +49,11 @@
 
 .light-text {
     color: var(--gray);
-    font-size: 400;
+    font-weight: 400;
     font-size: .8rem;
+}
+
+.overview-wrapper .dashboard-container .line-graph {
+    height: 60px;
+    width: 100%;
 }

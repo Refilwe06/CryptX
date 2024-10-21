@@ -22,6 +22,6 @@
 
 .light-text {
     color: var(--gray);
-    font-size: 400;
+    font-weight: 400;
     font-size: .8rem;
 }
